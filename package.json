@@ -1,0 +1,43 @@
+{
+    "name": "graphql-api",
+    "version": "0.1.0",
+    "description": "GraphQL API from ProjectFa",
+    "main": "app.js",
+    "scripts": {
+        "test": "DEBUG=true cucumber-js --require src/test/features/support src/test/features/**/*.feature",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Wahiga/authentication-api.git"
+    },
+    "keywords": [],
+    "author": "Diogo Munhos",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Wahiga/authentication-api/issues"
+    },
+    "homepage": "https://github.com/Wahiga/authentication-api#readme",
+    "dependencies": {
+        "airbrake-js": "^1.4.2",
+        "bcrypt": "^3.0.0",
+        "body-parser": "^1.18.3",
+        "express": "^4.16.3",
+        "express-graphql": "^0.6.12",
+        "express-promise-router": "^3.0.2",
+        "graphql": "^0.13.2",
+        "jsonwebtoken": "^8.3.0",
+        "mongoose": "^5.1.5"
+    },
+    "devDependencies": {
+        "assert": "^1.4.1",
+        "chai": "^4.1.2",
+        "chai-as-promised": "^7.1.1",
+        "cucumber": "^4.2.1",
+        "dotenv": "^6.0.0",
+        "nconf": "^0.10.0",
+        "nodemon": "^1.17.5",
+        "request": "^2.87.0",
+        "request-promise": "^4.2.2"
+    }
+}
