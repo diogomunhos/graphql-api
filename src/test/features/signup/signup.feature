@@ -49,7 +49,7 @@ Feature: Create a new user using authentication api
         Given I don't have a user
         And I fill the informations without birthdate
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 200 and a message "Birthdate cannot be null"
+        Then I should receive a response with status code 400
 
     Scenario: Got an error message when try to create a user with an invalid birthdate
         Given I don't have a user
@@ -67,7 +67,7 @@ Feature: Create a new user using authentication api
         Given I don't have a user
         And I fill the informations without born country
         When I send the request to authentication api signup method
-        Then I should receive a response with status code 200 and a message "Born country cannot be null"  
+        Then I should receive a response with status code 400
 
     Scenario: Got an error message when try to create a user already created
         Given I have an user 

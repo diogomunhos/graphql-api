@@ -3,7 +3,7 @@ class AuthenticationController {
         this.req = req;
         this.res = res;
         this.next = next;
-        this.AuthenticationService = require('../../services/authentication/authentication.service');
+        this.AuthenticationService = require('../../services/authentication.service');
     }
 
     async verify() {

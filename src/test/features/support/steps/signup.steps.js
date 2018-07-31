@@ -148,6 +148,12 @@ Then('I should receive a response with status code {int} and a message {string}'
     callback();
 })
 
+Then('I should receive a response with status code {int}', function(statusCode, callback) {
+    assert.notEqual(this.getResponse().statusCode, undefined, 'No status code founded, Is this server still running? ');
+    assert.equal(this.getResponse().statusCode, statusCode);
+    callback();
+})
+
 Then('doing a search on the database the first_name and last_name are uppercase text, username and email are lowercase', async function() {
     const userModel = require('../../../../main/models/user.model');
     const user = await userModel.find({ username: String(UserHelper.generateBaseUser().username).toLowerCase() }).exec();

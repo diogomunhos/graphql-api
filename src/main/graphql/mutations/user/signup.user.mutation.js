@@ -1,7 +1,8 @@
 const GraphQLNonNull = require('graphql').GraphQLNonNull;
 const GraphQLString = require('graphql').GraphQLString;
 const UserType = require('../../types/user.type');
-const SignupService = require('../../../services/authentication/signup.service');
+const SignupService = require('../../../services/signup.service');
+const GraphQLContryType = require('../../types/commons/country.type').country;
 
 exports.signup = {
     type: UserType.userType,
@@ -22,24 +23,18 @@ exports.signup = {
             type: GraphQLString
         },
         born_country: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLContryType)
         },
         document_number: {
             type: GraphQLString
         },
         birthdate: {
-            type: GraphQLString
+            type: new GraphQLNonNull(GraphQLString)
         }
     },
     resolve(root, params) {
         const service = new SignupService();
         const response = service.signup(params);
-        // const cModel = new CustomerModel(params);
-        // const newCustomer = cModel.save();
-        // if (!newCustomer) {
-        //     throw new Error('Error');
-        // }
-
         return response;
     }
 }

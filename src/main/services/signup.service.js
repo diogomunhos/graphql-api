@@ -14,12 +14,8 @@ class SignupService {
             signupHelper.userExists(result);
             const user = await this.UserRepository.createUser(signup_request);
             return user;
-            // const response = await this.ResponseHelper.createSignupSuccessResponse();
-            // return response;
         } catch (err) {
             throw err;
-            // const response = await this.ResponseHelper.createFailResponse(401, err);
-            // return response;
         }
     }
 }

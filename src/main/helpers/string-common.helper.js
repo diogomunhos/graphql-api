@@ -14,6 +14,10 @@ class StringCommonHelper {
         return (string === undefined || string === "" || string === null || string === "null");
     }
 
+    isDateValid(stringDate) {
+        return !(new Date(stringDate) == "Invalid Date")
+    }
+
 }
 
 module.exports = new StringCommonHelper();

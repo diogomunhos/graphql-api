@@ -11,8 +11,8 @@ class UserHelper {
             email: "teste@teste.com",
             username: "teste@teste.com",
             password: "Password#2018",
-            birthdate: new Date(),
-            born_country: "Brazil",
+            birthdate: "10/10/2010",
+            born_country: "BR",
             document_number: "1234567"
         }
     }
@@ -122,8 +122,8 @@ class UserHelper {
     }
 
     createMutation(request) {
-        const mutation = {
-            query: `mutation{ signup(first_name: "${request.first_name}", last_name: "${(request.last_name)}", email: "${(request.email)}", username: "${(request.username)}", password: "${(request.password)}", birthdate: "${(request.birthdate)}", born_country: "${(request.born_country)}", document_number: "${(request.document_number)}"){id, first_name}}`
+            const mutation = {
+                    query: `mutation{ signup(first_name: "${request.first_name}", last_name: "${(request.last_name)}", email: "${(request.email)}", username: "${(request.username)}", password: "${(request.password)}", birthdate: ${((request.birthdate) === null ? null : `"${request.birthdate}"`)}, born_country: ${(request.born_country)}, document_number: "${(request.document_number)}"){id, first_name}}`
         }
         return mutation;
     }

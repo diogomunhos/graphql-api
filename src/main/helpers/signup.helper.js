@@ -57,7 +57,7 @@ class SignupHelper {
         if (this.StringHelper.isInvalid(this.signup_request.birthdate)) {
             throw new Error(this.labels.missing_birthdate_error);
         }
-        if (new Date(this.signup_request.birthdate) == "Invalid Date") {
+        if (!this.StringHelper.isDateValid(this.signup_request.birthdate)) {
             throw new Error(this.labels.invalid_birthdate);
         }
     }

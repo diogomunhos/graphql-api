@@ -10,7 +10,7 @@ class UserSeed {
             password: "SoFuckingCrazy#2018",
             birthdate: new Date(),
             document_number: "1234567",
-            born_country: "Brazil",
+            born_country: "BR",
             is_active: true,
             addresses: [],
             user_preferences: {
@@ -31,7 +31,7 @@ class UserSeed {
             password: "SoFuckingCrazy#2018",
             birthdate: new Date(),
             document_number: "1234567",
-            born_country: "Brazil",
+            born_country: "BR",
             is_active: false,
             addresses: [],
             user_preferences: {
