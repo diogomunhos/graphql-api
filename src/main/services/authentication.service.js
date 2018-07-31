@@ -1,7 +1,7 @@
 class AuthenticationService {
     constructor() {
-        this.AuthenticationHelper = require('../../helpers/authentication.helper');
-        this.UserRepository = require('../../repositories/user.repository');
+        this.AuthenticationHelper = require('../helpers/authentication.helper');
+        this.UserRepository = require('../repositories/user.repository');
     }
 
     async verify(token) {

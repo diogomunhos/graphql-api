@@ -1,8 +1,7 @@
 class SignupService {
     constructor() {
-        this.SignupHelper = require('../../helpers/signup.helper');
-        this.ResponseHelper = require('../../helpers/response.helper');
-        this.UserRepository = require('../../repositories/user.repository');
+        this.SignupHelper = require('../helpers/signup.helper');
+        this.UserRepository = require('../repositories/user.repository');
     }
 
     async signup(signup_request) {
