@@ -16,6 +16,7 @@ class Server {
         this.bodyParserConfiguration();
         this.graphqlConfiguration();
         this.createDataBaseConnection();
+        this.iniateAdminUser();
         this.initErrorMonitor();
     }
 
@@ -29,6 +30,11 @@ class Server {
             const makeErrorHandler = require('airbrake-js/dist/instrumentation/express');
             this.app.use(makeErrorHandler(airbrake));
         }
+    }
+
+    iniateAdminUser() {
+        const seed = require('../seed/user/user.config.seed');
+        seed.init();
     }
 
     setDatabaseName(database_name) {

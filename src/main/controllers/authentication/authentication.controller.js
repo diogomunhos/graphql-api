@@ -19,7 +19,7 @@ class AuthenticationController {
 
     setDevContext() {
         const admin = require('../../../test/seeds/data/users.seed').getAdminUser()
-        this.service.setContext(admin);
+        this.service.setContext(admin.user);
     }
 }
 
