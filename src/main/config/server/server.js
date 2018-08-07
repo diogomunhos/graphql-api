@@ -5,6 +5,7 @@ class Server {
         this.serverInstance;
         this.database_name;
         this.db;
+        this.isTestRunning = false;
     }
 
     init() {
@@ -55,14 +56,22 @@ class Server {
         const customSchema = require('../../graphql/index.graphql').customSchema;
         const graphqlHTTP = require('express-graphql');
         const jwt = require('jsonwebtoken');
+        const AuthenticationController = require('../../controllers/authentication/authentication.controller');
+        const controller = new AuthenticationController();
         this.app.use('/graphql', (req, res, next) => {
-            const AuthenticationController = require('../../controllers/authentication/authentication.controller');
-            const controller = new AuthenticationController(req, res, next);
-            controller.verify();
+            if (!this.isDevEnvironment() || this.isTestRunning) {
+                controller.verify(req, res, next);
+            } else {
+                controller.setDevContext();
+                next();
+            }
         }, graphqlHTTP({
             schema: customSchema,
             rootValue: global,
-            graphiql: true
+            graphiql: true,
+            context: () => {
+                return controller.getContext();
+            }
         }));
     }
 

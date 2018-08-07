@@ -1,11 +1,12 @@
-const GraphQLNonNull = require('graphql').GraphQLNonNull;
-const GraphQLString = require('graphql').GraphQLString;
+const { GraphQLNonNull } = require('graphql/type/definition');
+const { GraphQLString } = require('graphql/type/scalars');
 const UserType = require('../../types/user.type');
 const SignupService = require('../../../services/signup.service');
 const GraphQLContryType = require('../../types/commons/country.type').country;
-
+const resolveWithMutationPermission = require('../../resolvers/has-permission.resolver').resolveWithMutationPermission;
 exports.signup = {
     type: UserType.userType,
+    description: "adsasdasdas",
     args: {
         first_name: {
             type: GraphQLString
@@ -32,9 +33,8 @@ exports.signup = {
             type: new GraphQLNonNull(GraphQLString)
         }
     },
-    resolve(root, params) {
+    resolve: (root, params, context) => {
         const service = new SignupService();
-        const response = service.signup(params);
-        return response;
+        return service.signup(params, context);
     }
 }

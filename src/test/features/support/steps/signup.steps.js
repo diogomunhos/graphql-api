@@ -9,6 +9,11 @@ Given('I don\'t have a user', function(callback) {
     callback();
 })
 
+Given('the system user does not have permission', function(callback) {
+    this.setAPIConfig(SignupConfig.getAPIConfigurationWithoutPermission());
+    callback();
+})
+
 Given('I have an user', function(callback) {
     user = require('../../../seeds/data/users.seed').getActiveUser();
     this.setAPIConfig(SignupConfig.getAPIConfiguration());
@@ -151,6 +156,13 @@ Then('I should receive a response with status code {int} and a message {string}'
 Then('I should receive a response with status code {int}', function(statusCode, callback) {
     assert.notEqual(this.getResponse().statusCode, undefined, 'No status code founded, Is this server still running? ');
     assert.equal(this.getResponse().statusCode, statusCode);
+    callback();
+})
+
+Then('I should receive a response with status code {int} and an error message {string}', function(statusCode, message, callback) {
+    assert.notEqual(this.getResponse().statusCode, undefined, 'No status code founded, Is this server still running? ');
+    assert.equal(this.getResponse().statusCode, statusCode);
+    assert.equal(this.getResponse().body.errors[0].message, message);
     callback();
 })
 

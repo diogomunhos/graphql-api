@@ -1,19 +1,25 @@
 class AuthenticationController {
-    constructor(req, res, next) {
-        this.req = req;
-        this.res = res;
-        this.next = next;
-        this.AuthenticationService = require('../../services/authentication.service');
+    constructor() {
+        const AuthenticationService = require('../../services/authentication.service');
+        this.service = new AuthenticationService();
     }
 
-    async verify() {
-        const service = new this.AuthenticationService();
-        const response = await service.verify(this.req.get('Authorization'));
+    async verify(req, res, next) {
+        const response = await this.service.verify(req.get('Authorization'));
         if (!response.isSuccessful) {
-            this.res.status(401).send({ message: response.message });
+            res.status(401).send({ message: response.message });
         } else {
-            this.next();
+            next();
         }
+    }
+
+    getContext() {
+        return this.service.getContext();
+    }
+
+    setDevContext() {
+        const admin = require('../../../test/seeds/data/users.seed').getAdminUser()
+        this.service.setContext(admin);
     }
 }
 

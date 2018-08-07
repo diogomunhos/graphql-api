@@ -1,6 +1,11 @@
 Feature: Create a new user using authentication api
    Feature Description: I should be able to create a user using authentication api
 
+    Scenario: Access signup method without permission
+        Given the system user does not have permission
+        And I fill the informations correctly
+        When I send the request to authentication api signup method
+        Then I should receive a response with status code 200 and an error message "You have no permission on the mutation signup"
 
     Scenario: Create a new user
         Given I don't have a user

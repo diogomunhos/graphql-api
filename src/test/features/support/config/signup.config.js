@@ -13,6 +13,17 @@ class SignupConfig {
         }
     }
 
+    getAPIConfigurationWithoutPermission() {
+        const seed = require('../../../seeds/data/users.seed');
+        const userWithoutPermission = seed.getUserWithoutSignupPermission();
+        return {
+            uri: "/graphql",
+            isJSON: true,
+            method: "POST",
+            headers: this.AuthenticationHelper.getValidAuthorizationHeaderWithoutPermission(userWithoutPermission)
+        }
+    }
+
 }
 
 module.exports = new SignupConfig();

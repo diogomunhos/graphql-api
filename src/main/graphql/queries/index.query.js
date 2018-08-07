@@ -1,9 +1,7 @@
-const GraphQLObjectType = require('graphql').GraphQLObjectType
-const GraphQLList = require('graphql').GraphQLList
-const GraphQLNonNull = require('graphql').GraphQLNonNull;
-const GraphQLString = require('graphql').GraphQLString;
+const { GraphQLList, GraphQLObjectType } = require('graphql/type/definition')
 const userType = require('../types/user.type').userType;
 const userQuery = require('./user/user.query');
+const resolveWithObjectPermission = require('../resolvers/has-permission.resolver').resolveWithObjectPermission;
 
 exports.queryType = new GraphQLObjectType({
     name: 'Query',
@@ -11,9 +9,9 @@ exports.queryType = new GraphQLObjectType({
         return {
             users: {
                 type: new GraphQLList(userType),
-                resolve: () => {
-                    return userQuery.result();
-                }
+                resolve: resolveWithObjectPermission("user", "read", userQuery.result(), (result) => {
+                    return result;
+                })
             }
         }
     }

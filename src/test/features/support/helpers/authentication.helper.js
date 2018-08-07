@@ -12,6 +12,12 @@ class AuthorizationHelper {
         return headers;
     }
 
+    getValidAuthorizationHeaderWithoutPermission(user) {
+        const token = this.jwt.sign({ user }, process.env.SECURE_KEY.split(",")[0]);
+        const headers = { "Authorization": `Bearer ${token}` }
+        return headers;
+    }
+
 
     getInactiveUserValidAuthorizationHeader() {
         const token = this.jwt.sign({ user: this.inactiveMacGyver }, process.env.SECURE_KEY.split(",")[0]);

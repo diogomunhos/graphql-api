@@ -10,12 +10,16 @@ class SeedGenerator {
     async createUser() {
         const user_to_load = require('../seeds/data/users.seed').getActiveUser();
         const user_to_load_2 = require('../seeds/data/users.seed').getInactiveUser();
+        const user_to_load_3 = require('../seeds/data/users.seed').getUserWithoutSignupPermission();
         const bcrypt = require('bcrypt');
         user_to_load.password = bcrypt.hashSync(user_to_load.password, 10);
         user_to_load_2.password = bcrypt.hashSync(user_to_load_2.password, 10);
+        user_to_load_3.password = bcrypt.hashSync(user_to_load_3.password, 10);
         let uModel = new this.UserModel(user_to_load);
         let user = await uModel.save();
         uModel = new this.UserModel(user_to_load_2);
+        user = await uModel.save();
+        uModel = new this.UserModel(user_to_load_3);
         user = await uModel.save();
     }
 }

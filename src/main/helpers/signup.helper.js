@@ -1,7 +1,9 @@
 class SignupHelper {
-    constructor(signup_request) {
+    constructor(signup_request, context) {
+        this.context = context;
         this.signup_request = signup_request;
         this.labels = require('../../labels/signup.label');
+        this.permission_labels = require('../../labels/permission.label');
         this.StringHelper = require('./string-common.helper');
     }
 
@@ -15,6 +17,14 @@ class SignupHelper {
         this.isBornCountryValid();
         this.isDocumentNumberValid();
         this.formatRequest();
+        this.createUserPermissions();
+    }
+
+    checkPermissions() {
+        const permission = this.context().permissions;
+        if (permission === undefined || permission.mutations === undefined || permission.mutations.signup === undefined || !permission.mutations.signup) {
+            throw new Error(this.permission_labels.error_message.mutation_permission_denied("signup"));
+        }
     }
 
     isLastNameValid() {
@@ -95,6 +105,56 @@ class SignupHelper {
             email_valid: false,
             push_notification: false,
             email_marketing: false
+        }
+    }
+
+    createUserPermissions() {
+        this.signup_request.permissions = {
+            objects: {
+                user: {
+                    read: true,
+                    edit: true,
+                    read_all: true,
+                    delete_record: true,
+                    fields: {
+                        first_name: {
+                            read: true,
+                            edit: true
+                        },
+                        last_name: {
+                            read: true,
+                            edit: true
+                        },
+                        email: {
+                            read: true,
+                            edit: true
+                        },
+                        username: {
+                            read: true,
+                            edit: true
+                        },
+                        password: {
+                            read: true,
+                            edit: true
+                        },
+                        born_country: {
+                            read: true,
+                            edit: true
+                        },
+                        document_number: {
+                            read: true,
+                            edit: true
+                        },
+                        birthdate: {
+                            read: true,
+                            edit: true
+                        }
+                    }
+                }
+            },
+            mutations: {
+                signup: true
+            }
         }
     }
 

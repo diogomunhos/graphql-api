@@ -59,6 +59,116 @@ const userSchema = new Schema({
             type: Boolean,
             required: true
         }
+    },
+    permissions: {
+        objects: {
+            user: {
+                read: {
+                    type: Boolean,
+                    required: true
+                },
+                edit: {
+                    type: Boolean,
+                    required: true
+                },
+                read_all: {
+                    type: Boolean,
+                    required: true
+                },
+                delete_record: {
+                    type: Boolean,
+                    required: true
+                },
+                fields: {
+                    first_name: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    last_name: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    email: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    username: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    password: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    born_country: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    birthdate: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    },
+                    document_number: {
+                        read: {
+                            type: Boolean,
+                            required: true
+                        },
+                        edit: {
+                            type: Boolean,
+                            required: true
+                        }
+                    }
+                }
+            }
+        },
+        mutations: {
+            signup: {
+                type: Boolean,
+                required: true
+            }
+        }
     }
 
 });

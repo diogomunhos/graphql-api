@@ -6,6 +6,7 @@ const SeedGenerator = require('../../seeds/index.seed');
 // Synchronous
 BeforeAll(async function() {
     server.setDatabaseName("test");
+    server.isTestRunning = true;
     server.init();
     server.start();
     await SeedGenerator.init();
